@@ -115,10 +115,13 @@ export function computeInsights(events, puppyName, now = new Date()) {
   const acc = events.filter(isAccident).map(e => new Date(e.occurred_at));
   const thisWeek = acc.filter(t => t >= weekAgo).length;
   const lastWeek = acc.filter(t => t >= twoWeeksAgo && t < weekAgo).length;
+  // Only compare with the week before if at least half of it was actually tracked;
+  // otherwise "0 the week before" would wrongly suggest things got worse.
+  const trackedLastWeek = events.some(e => new Date(e.occurred_at) < startOfDay(now, -9));
   if (acc.length) potty.push({
     title: 'Accidents, last 7 days',
     value: String(thisWeek),
-    detail: `${lastWeek} the week before`,
+    detail: trackedLastWeek ? `${lastWeek} the week before` : 'First week of tracking',
   });
 
   for (const m of mealTimes(events)) {

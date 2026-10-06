@@ -1,4 +1,5 @@
-import * as db from './db.js';
+import * as realDb from './db.js';
+import * as demoDb from './demo-db.js';
 import {
   KINDS, icon, kindIcon, eventLabel, eventIcon, eventCat, isPee, isPoop, isMeal, isCrate, isAccident,
   fmtTime, ago, elapsed, startOfDay, sameDay, dayLabel, fmtDuration, esc,
@@ -7,10 +8,15 @@ import { computeInsights, peeRhythm } from './insights.js';
 import { openSheet } from './sheet.js';
 import { retrieverSketch } from './logo.js';
 
+// Demo mode (…/project-lucy/?demo): same app, but data comes from demo-db.js in memory.
+// Nothing touches Supabase, and every visit starts from the same clean week.
+const DEMO = new URLSearchParams(location.search).has('demo');
+const db = DEMO ? demoDb : realDb;
+
 const app = document.getElementById('app');
 const DAYS_LOADED = 30;
 // Shown at the bottom of every screen. Bump this when you publish an update.
-const VERSION = '1.3';
+const VERSION = '1.4';
 const versionTag = `<p class="version">Version ${VERSION}</p>`;
 
 const state = {
@@ -410,16 +416,20 @@ function settingsView() {
     <header class="top"><a href="#today" class="icon-btn" aria-label="Back">${icon('chevron_left')}</a><h1>Household</h1><span></span></header>
     <div class="card">
       <div class="kv"><span>Household</span><b>${esc(household.name)}</b></div>
-      <div class="kv"><span>PIN</span><b class="pin">${esc(household.pin)}</b></div>
+      ${DEMO ? '' : `<div class="kv"><span>PIN</span><b class="pin">${esc(household.pin)}</b></div>`}
       <div class="kv"><span>Puppy</span><b>${esc(puppy.name)}${puppyAge() ? ` · ${puppyAge()}` : ''}</b></div>
       <div class="kv"><span>You</span><b>${esc(me.name)}</b></div>
       <div class="kv"><span>Members</span><b>${uniqueNames(members).map(esc).join(', ')}</b></div>
     </div>
+    ${DEMO ? `
+    <h2 class="section-title">About this demo</h2>
+    <p class="muted">Biscuit, Alex and Sam are made up. In a real household, each family member joins on their own phone with the household name and a 4-digit PIN, and everyone sees the same timeline, updated instantly.</p>
+    <a class="btn ghost" href="./">Exit demo</a>` : `
     <h2 class="section-title">Add someone</h2>
     <p class="muted">They open this website on their phone, tap <b>Join a household</b>, and enter <b>${esc(household.name)}</b> and the PIN above.</p>
     <h2 class="section-title">This phone</h2>
     <p class="muted">Tip: use your browser's “Add to Home Screen” for one-tap access.</p>
-    <button type="button" class="btn ghost" data-action="signout">Sign out on this phone</button>`;
+    <button type="button" class="btn ghost" data-action="signout">Sign out on this phone</button>`}`;
 }
 
 function welcomeView() {
@@ -459,8 +469,15 @@ function welcomeView() {
       <p class="muted">Puppy Tracker · a shared log of your puppy's potty breaks, meals and crate time.</p>
       <button type="button" class="btn primary big" data-welcome="start">Start a new household</button>
       <button type="button" class="btn secondary big" data-welcome="join">Join a household</button>
+      <a class="demo-link" href="?demo">Try the demo ${icon('arrow_forward')}</a>
     </div>`;
 }
+
+const demoBanner = `
+  <div class="demo-banner">
+    <span><b>Demo</b> · Biscuit's made-up week. Changes aren't saved.</span>
+    <a href="./">Exit demo</a>
+  </div>`;
 
 const VIEWS = { today: todayView, history: historyView, insights: insightsView, settings: settingsView };
 
@@ -473,7 +490,7 @@ function render() {
   const tab = (id, iconName, label) =>
     `<a href="#${id}" class="${v === id ? 'on' : ''}" ${v === id ? 'aria-current="page"' : ''}>${icon(iconName)}${label}</a>`;
   app.innerHTML = `
-    <main class="content">${VIEWS[v]()}${versionTag}</main>
+    <main class="content">${DEMO ? demoBanner : ''}${VIEWS[v]()}${versionTag}</main>
     <nav class="tabs">${tab('today', 'home', 'Today')}${tab('history', 'calendar_month', 'History')}${tab('insights', 'insights', 'Insights')}</nav>`;
 }
 
@@ -543,6 +560,9 @@ setInterval(refresh, 60000);
 setInterval(() => document.querySelectorAll('[data-since]').forEach(el => { el.textContent = elapsed(el.dataset.since); }), 15000);
 
 async function boot() {
+  // Shareable shortcut: …/project-lucy/#demo → …/project-lucy/?demo
+  if (location.hash === '#demo') return location.replace(`${location.pathname}?demo`);
+  if (DEMO) demoDb.reset();
   if (!db.configured) {
     app.innerHTML = `<main class="content narrow"><div class="empty-card">
       <p><b>Almost there.</b> Add your Supabase URL and publishable key to <code>js/config.js</code>. See the README.</p></div></main>`;
