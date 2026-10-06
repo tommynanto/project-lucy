@@ -8,6 +8,9 @@ import { openSheet } from './sheet.js';
 
 const app = document.getElementById('app');
 const DAYS_LOADED = 30;
+// Shown at the bottom of every screen. Bump this when you publish an update.
+const VERSION = '1.1';
+const versionTag = `<p class="version">Version ${VERSION}</p>`;
 
 const state = {
   household: null, puppy: null, me: null, members: [],
@@ -452,14 +455,14 @@ const VIEWS = { today: todayView, history: historyView, insights: insightsView, 
 
 function render() {
   if (!state.household) {
-    app.innerHTML = `<main class="content narrow">${welcomeView()}</main>`;
+    app.innerHTML = `<main class="content narrow">${welcomeView()}${versionTag}</main>`;
     return;
   }
   const v = VIEWS[currentView()] ? currentView() : 'today';
   const tab = (id, iconName, label) =>
     `<a href="#${id}" class="${v === id ? 'on' : ''}" ${v === id ? 'aria-current="page"' : ''}>${icon(iconName)}${label}</a>`;
   app.innerHTML = `
-    <main class="content">${VIEWS[v]()}</main>
+    <main class="content">${VIEWS[v]()}${versionTag}</main>
     <nav class="tabs">${tab('today', 'home', 'Today')}${tab('history', 'calendar_month', 'History')}${tab('insights', 'insights', 'Insights')}</nav>`;
 }
 
