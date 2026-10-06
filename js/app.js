@@ -16,7 +16,7 @@ const db = DEMO ? demoDb : realDb;
 const app = document.getElementById('app');
 const DAYS_LOADED = 30;
 // Shown at the bottom of every screen. Bump this when you publish an update.
-const VERSION = '1.7';
+const VERSION = '1.9';
 const versionTag = `<p class="version">Version ${VERSION}</p>`;
 
 const state = {
@@ -443,22 +443,22 @@ function welcomeView() {
 
   if (state.welcome === 'start') return `
     <form class="welcome" data-form="start">
-      <h1>New household</h1>
-      ${field('householdName', 'Household name', 'placeholder="e.g. The Smiths" autocomplete="off" required maxlength="60"')}
+      <h1>New Household</h1>
+      ${field('householdName', 'Household Name', 'placeholder="e.g. The Smiths" autocomplete="off" required maxlength="60"')}
       ${pin}
       <p class="field-hint">Other family members join with the household name + PIN.</p>
-      ${field('puppyName', "Puppy's name", 'autocomplete="off" required maxlength="40"')}
-      ${field('birthDate', 'Birth date (optional)', 'type="date"')}
-      ${field('memberName', 'Your name', 'autocomplete="given-name" required maxlength="40"')}
+      ${field('puppyName', "Puppy's Name", 'autocomplete="off" required maxlength="40"')}
+      ${field('birthDate', "Puppy's Birth Date (optional)", 'type="date"')}
+      ${field('memberName', 'Your Name', 'autocomplete="given-name" required maxlength="40"')}
       ${error}${submit('Start')}${back}
     </form>`;
 
   if (state.welcome === 'join') return `
     <form class="welcome" data-form="join">
       <h1>Join an existing household</h1>
-      ${field('householdName', 'Household name', 'autocomplete="off" required')}
+      ${field('householdName', 'Household Name', 'autocomplete="off" required')}
       ${pin}
-      ${field('memberName', 'Your name', 'autocomplete="given-name" required maxlength="40"')}
+      ${field('memberName', 'Your Name', 'autocomplete="given-name" required maxlength="40"')}
       ${error}${submit('Join')}${back}
     </form>`;
 
