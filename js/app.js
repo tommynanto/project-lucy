@@ -10,7 +10,7 @@ import { retrieverSketch } from './logo.js';
 const app = document.getElementById('app');
 const DAYS_LOADED = 30;
 // Shown at the bottom of every screen. Bump this when you publish an update.
-const VERSION = '1.2';
+const VERSION = '1.3';
 const versionTag = `<p class="version">Version ${VERSION}</p>`;
 
 const state = {
@@ -41,6 +41,16 @@ function putLocal(event, replaceId = event.id) {
 }
 
 const removeLocal = id => { state.events = state.events.filter(e => e.id !== id); };
+
+// The same person can appear more than once (rejoined, or a second phone). Show each name once,
+// ignoring capitals and extra spaces, keeping the first spelling.
+function uniqueNames(members) {
+  const seen = new Set();
+  return members.map(m => m.name.trim()).filter(n => {
+    const key = n.toLowerCase();
+    return !seen.has(key) && seen.add(key);
+  });
+}
 
 const memberName = id => state.members.find(m => m.id === id)?.name ?? '';
 
@@ -228,7 +238,7 @@ const hideToast = () => { toastEl.className = ''; };
 
 function eventList(events) {
   if (!events.length) return '<p class="empty">Nothing logged yet.</p>';
-  const showWho = state.members.length > 1;
+  const showWho = uniqueNames(state.members).length > 1;
   return `<ul class="timeline">${events.map(e => `
     <li><button type="button" class="ev cat-${eventCat(e)}${e.pending ? ' pending' : ''}" data-edit="${e.id}">
       <span class="ev-time">${fmtTime(e.occurred_at)}</span>
@@ -403,7 +413,7 @@ function settingsView() {
       <div class="kv"><span>PIN</span><b class="pin">${esc(household.pin)}</b></div>
       <div class="kv"><span>Puppy</span><b>${esc(puppy.name)}${puppyAge() ? ` · ${puppyAge()}` : ''}</b></div>
       <div class="kv"><span>You</span><b>${esc(me.name)}</b></div>
-      <div class="kv"><span>Members</span><b>${members.map(m => esc(m.name)).join(', ')}</b></div>
+      <div class="kv"><span>Members</span><b>${uniqueNames(members).map(esc).join(', ')}</b></div>
     </div>
     <h2 class="section-title">Add someone</h2>
     <p class="muted">They open this website on their phone, tap <b>Join a household</b>, and enter <b>${esc(household.name)}</b> and the PIN above.</p>
