@@ -15,7 +15,7 @@
   --meal: #2f8a64;     --meal-bg: #e2f2ea;
   --accident: #c2412f; --accident-bg: #fbe5e1;
   --crate: #7b5aa6;    --crate-bg: #f0eaf7;
-  --demo: #c4502f;     --demo-bg: #fbeae4;
+  --demo: #c4502f;     --demo-bg: #fbeae4;  --demo-text: #ffffff;
 
   --radius: 16px;
   --tabs-h: 64px;
@@ -40,7 +40,7 @@
   --meal: #5cc394;     --meal-bg: #1f3329;
   --accident: #ef7563; --accident-bg: #3d2420;
   --crate: #c4a8e8;    --crate-bg: #2e2640;
-  --demo: #f2906e;     --demo-bg: #3a241d;
+  --demo: #f2906e;     --demo-bg: #3a241d;  --demo-text: #2a120b;
   color-scheme: dark;
 }
 
@@ -163,6 +163,7 @@ h1, h2 { margin: 0; }
   border: 1px solid var(--border); background: var(--surface); font-weight: 600;
 }
 .btn.primary { background: var(--accent); color: var(--accent-text); border-color: var(--accent); }
+.btn.start { background: var(--demo); color: var(--demo-text); border-color: var(--demo); }
 .btn.secondary { background: var(--surface-2); border-color: var(--surface-2); }
 .btn.ghost { background: transparent; }
 .btn.danger { color: var(--danger); background: transparent; }
@@ -230,12 +231,13 @@ form.welcome h1 { text-align: left; }
 .field input:focus, .text-input:focus { outline: 2px solid var(--accent); outline-offset: 1px; }
 .welcome > .field-hint { text-align: left; margin: -6px 2px 0; font-size: 14px; color: var(--muted); }
 .form-error { color: var(--danger); margin: 0; font-weight: 600; }
-.demo-link {
-  align-self: center; display: inline-flex; align-items: center; gap: 4px;
-  min-height: 40px; padding: 0 12px; margin-top: 2px;
-  color: var(--demo); font-size: 15px; font-weight: 600; text-decoration: none;
+.demo-cta { display: flex; align-items: center; justify-content: center; gap: 6px; text-decoration: none; }
+.welcome > .demo-note { margin: -6px 0 0; font-size: 14px; color: var(--muted); }
+.jump-in {
+  display: flex; flex-direction: column; gap: 10px;
+  margin-top: 22px; padding-top: 20px; border-top: 1px solid var(--border);
 }
-.demo-link .icon { font-size: 16px; }
+.jump-in h2 { font-size: 16px; text-align: center; margin-bottom: 2px; }
 .demo-banner {
   display: flex; align-items: center; justify-content: space-between; gap: 10px;
   margin: 0 0 12px; padding: 8px 12px; border-radius: 12px;
