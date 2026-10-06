@@ -5,7 +5,7 @@
   --text: #1f1d1a;
   --muted: #6f6a63;
   --border: #e6e0d8;
-  --accent: #a9532f;
+  --accent: #4a6fb3;
   --accent-text: #ffffff;
   --danger: #c2412f;
 
@@ -14,7 +14,7 @@
   --both: #a8742f;     --both-bg: #f6ecdc;
   --meal: #2f8a64;     --meal-bg: #e2f2ea;
   --accident: #c2412f; --accident-bg: #fbe5e1;
-  --crate: #5363a8;    --crate-bg: #e7eaf7;
+  --crate: #7b5aa6;    --crate-bg: #f0eaf7;
 
   --radius: 16px;
   --tabs-h: 64px;
@@ -29,8 +29,8 @@
   --text: #f1ede7;
   --muted: #a39d94;
   --border: #36332e;
-  --accent: #e3916a;
-  --accent-text: #2a140a;
+  --accent: #9db6e8;
+  --accent-text: #0f1d38;
   --danger: #ef7563;
 
   --pee: #f0c049;      --pee-bg: #3a3120;
@@ -38,7 +38,7 @@
   --both: #d9a35c;     --both-bg: #372e22;
   --meal: #5cc394;     --meal-bg: #1f3329;
   --accident: #ef7563; --accident-bg: #3d2420;
-  --crate: #9aa8ec;    --crate-bg: #252a40;
+  --crate: #c4a8e8;    --crate-bg: #2e2640;
   color-scheme: dark;
 }
 
@@ -215,7 +215,8 @@ h1, h2 { margin: 0; }
 
 /* ── welcome / forms ── */
 .welcome { display: flex; flex-direction: column; gap: 14px; padding-top: 6vh; }
-.welcome .brand { font-size: 52px; text-align: center; color: var(--accent); }
+.welcome .brand { display: flex; justify-content: center; color: var(--accent); }
+.welcome .brand .logo { width: 84px; height: 84px; }
 .welcome h1 { font-size: 30px; text-align: center; }
 form.welcome h1 { text-align: left; }
 .welcome > p { text-align: center; margin: 0 0 12px; }
