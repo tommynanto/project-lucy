@@ -5,8 +5,8 @@
 // field), add it here and to generateWeek() so the demo shows it too.
 import { startOfDay, toDateInput } from './events.js';
 
-const ALEX = { id: 'demo-alex', name: 'Alex', household_id: 'demo-household' };
-const SAM = { id: 'demo-sam', name: 'Sam', household_id: 'demo-household' };
+const DONNA = { id: 'demo-donna', name: 'Donna', household_id: 'demo-household' };
+const MARTY = { id: 'demo-marty', name: 'Marty', household_id: 'demo-household' };
 
 let S = null;
 
@@ -14,9 +14,9 @@ export const configured = true;
 
 export function reset(now = new Date()) {
   S = {
-    household: { id: 'demo-household', name: "Biscuit's family", pin: '' },
+    household: { id: 'demo-household', name: "Biscuit's Family", pin: '' },
     puppy: { id: 'demo-puppy', name: 'Biscuit', birth_date: toDateInput(startOfDay(now, -77)) }, // ~11 weeks old
-    members: [ALEX, SAM],
+    members: [DONNA, MARTY],
     events: generateWeek(now),
   };
 }
@@ -27,7 +27,7 @@ const copy = x => JSON.parse(JSON.stringify(x));
 
 export async function loadHousehold() {
   await tick();
-  return copy({ me: ALEX, household: S.household, puppy: S.puppy, members: S.members });
+  return copy({ me: DONNA, household: S.household, puppy: S.puppy, members: S.members });
 }
 
 export async function loadMembers() {
@@ -82,7 +82,7 @@ function seededRandom(seed) {
 export function generateWeek(now = new Date()) {
   const rand = seededRandom(20261006);
   const between = (a, b) => a + rand() * (b - a);
-  const who = () => (rand() < 0.55 ? ALEX : SAM);
+  const who = () => (rand() < 0.55 ? DONNA : MARTY);
   // Day index 0 = six days ago … 6 = today; -1 = the evening before the week starts.
   const at = (day, minutes) => { const d = startOfDay(now, day - 6); d.setMinutes(Math.round(minutes)); return d; };
 
@@ -100,9 +100,9 @@ export function generateWeek(now = new Date()) {
     const b = bed[day + 1], w = 1440 + wake[day + 1];
     if (day <= 1) {
       const night = 1440 + 140 + between(-15, 15);
-      crate(day, b, night, ALEX);
-      potty(day, night + 5, 'pee', ALEX);
-      crate(day, night + 15, w, ALEX);
+      crate(day, b, night, DONNA);
+      potty(day, night + 5, 'pee', DONNA);
+      crate(day, night + 15, w, DONNA);
     } else {
       crate(day, b, w);
     }

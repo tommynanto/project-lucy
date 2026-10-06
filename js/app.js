@@ -16,7 +16,7 @@ const db = DEMO ? demoDb : realDb;
 const app = document.getElementById('app');
 const DAYS_LOADED = 30;
 // Shown at the bottom of every screen. Bump this when you publish an update.
-const VERSION = '1.4';
+const VERSION = '1.7';
 const versionTag = `<p class="version">Version ${VERSION}</p>`;
 
 const state = {
@@ -423,10 +423,10 @@ function settingsView() {
     </div>
     ${DEMO ? `
     <h2 class="section-title">About this demo</h2>
-    <p class="muted">Biscuit, Alex and Sam are made up. In a real household, each family member joins on their own phone with the household name and a 4-digit PIN, and everyone sees the same timeline, updated instantly.</p>
+    <p class="muted">Biscuit, Donna and Marty are made up. In a real household, each family member joins on their own phone with the household name and a 4-digit PIN, and everyone sees the same timeline, updated instantly.</p>
     <a class="btn ghost" href="./">Exit demo</a>` : `
     <h2 class="section-title">Add someone</h2>
-    <p class="muted">They open this website on their phone, tap <b>Join a household</b>, and enter <b>${esc(household.name)}</b> and the PIN above.</p>
+    <p class="muted">They open this website on their phone, tap <b>Join an existing household</b>, and enter <b>${esc(household.name)}</b> and the PIN above.</p>
     <h2 class="section-title">This phone</h2>
     <p class="muted">Tip: use your browser's “Add to Home Screen” for one-tap access.</p>
     <button type="button" class="btn ghost" data-action="signout">Sign out on this phone</button>`}`;
@@ -455,7 +455,7 @@ function welcomeView() {
 
   if (state.welcome === 'join') return `
     <form class="welcome" data-form="join">
-      <h1>Join a household</h1>
+      <h1>Join an existing household</h1>
       ${field('householdName', 'Household name', 'autocomplete="off" required')}
       ${pin}
       ${field('memberName', 'Your name', 'autocomplete="given-name" required maxlength="40"')}
@@ -467,9 +467,13 @@ function welcomeView() {
       <div class="brand">${retrieverSketch()}</div>
       <h1>Project Lucy</h1>
       <p class="muted">Puppy Tracker · a shared log of your puppy's potty breaks, meals and crate time.</p>
-      <button type="button" class="btn primary big" data-welcome="start">Start a new household</button>
-      <button type="button" class="btn secondary big" data-welcome="join">Join a household</button>
-      <a class="demo-link" href="?demo">Try the demo ${icon('arrow_forward')}</a>
+      <a class="btn primary big demo-cta" href="?demo">Try the demo ${icon('arrow_forward')}</a>
+      <p class="demo-note">See a week with Biscuit, a made-up puppy.</p>
+      <div class="jump-in">
+        <h2>Get started</h2>
+        <button type="button" class="btn start" data-welcome="start">Start a new household</button>
+        <button type="button" class="btn secondary" data-welcome="join">Join an existing household</button>
+      </div>
     </div>`;
 }
 
