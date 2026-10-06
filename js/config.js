@@ -4,5 +4,5 @@
 // These are SAFE to commit: the publishable (anon) key is designed to be public.
 // Your data is protected by the Row Level Security rules in supabase/schema.sql.
 // NEVER put the secret / service_role key here.
-export const SUPABASE_URL = 'https://YOUR-PROJECT-REF.supabase.co';
-export const SUPABASE_KEY = 'YOUR-PUBLISHABLE-OR-ANON-KEY';
+export const SUPABASE_URL = 'https://aubklfozqqsyfjiqkekd.supabase.co/rest/v1/';
+export const SUPABASE_KEY = 'sb_publishable_X_IVHlGjHdbmAtzY1LHWiw_D4tfNfBP';
