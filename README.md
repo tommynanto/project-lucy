@@ -1,4 +1,4 @@
-# Puppy Tracker
+# Project Lucy – Puppy Tracker
 
 A shared, phone-friendly log of a puppy's potty breaks and meals for one household.
 
@@ -25,9 +25,9 @@ Put both values in [`js/config.js`](js/config.js). These are safe to commit: the
 
 ### 3. GitHub Pages
 
-1. Create a repo named `puppy-tracker` and push these files to `main`.
+1. Create a repo named `project-lucy` and push these files to `main`.
 2. Repo **Settings → Pages → Build and deployment**: Source **Deploy from a branch**, branch **main**, folder **/ (root)**.
-3. After a minute the site is at `https://YOUR-USERNAME.github.io/puppy-tracker/`.
+3. After a minute the site is at `https://YOUR-USERNAME.github.io/project-lucy/`.
 
 ## Using it
 

@@ -1,6 +1,6 @@
 {
-  "name": "Puppy Tracker",
-  "short_name": "Puppy",
+  "name": "Project Lucy – Puppy Tracker",
+  "short_name": "Lucy",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
