@@ -441,8 +441,8 @@ function welcomeView() {
   return `
     <div class="welcome">
       <div class="brand">${icon('pets')}</div>
-      <h1>Puppy Tracker</h1>
-      <p class="muted">A shared log of your puppy's potty breaks and meals.</p>
+      <h1>Project Lucy</h1>
+      <p class="muted">Puppy Tracker · a shared log of your puppy's potty breaks, meals and crate time.</p>
       <button type="button" class="btn primary big" data-welcome="start">Start a new household</button>
       <button type="button" class="btn secondary big" data-welcome="join">Join a household</button>
     </div>`;
