@@ -5,11 +5,12 @@ import {
 } from './events.js';
 import { computeInsights, peeRhythm } from './insights.js';
 import { openSheet } from './sheet.js';
+import { retrieverSketch } from './logo.js';
 
 const app = document.getElementById('app');
 const DAYS_LOADED = 30;
 // Shown at the bottom of every screen. Bump this when you publish an update.
-const VERSION = '1.1';
+const VERSION = '1.2';
 const versionTag = `<p class="version">Version ${VERSION}</p>`;
 
 const state = {
@@ -443,7 +444,7 @@ function welcomeView() {
 
   return `
     <div class="welcome">
-      <div class="brand">${icon('pets')}</div>
+      <div class="brand">${retrieverSketch()}</div>
       <h1>Project Lucy</h1>
       <p class="muted">Puppy Tracker · a shared log of your puppy's potty breaks, meals and crate time.</p>
       <button type="button" class="btn primary big" data-welcome="start">Start a new household</button>

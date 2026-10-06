@@ -89,6 +89,7 @@ export function elapsed(since, now = new Date()) {
 export function ago(d, now = new Date()) {
   const min = (now - new Date(d)) / 60000;
   if (min < 1) return 'just now';
+  if (min >= 600) return `${Math.round(min / 60)}h ago`;   // "12h ago" fits the summary cards; minutes don't matter by then
   return `${fmtDuration(min)} ago`;
 }
 
