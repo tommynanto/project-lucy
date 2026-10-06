@@ -15,6 +15,7 @@
   --meal: #2f8a64;     --meal-bg: #e2f2ea;
   --accident: #c2412f; --accident-bg: #fbe5e1;
   --crate: #7b5aa6;    --crate-bg: #f0eaf7;
+  --demo: #c4502f;     --demo-bg: #fbeae4;
 
   --radius: 16px;
   --tabs-h: 64px;
@@ -39,6 +40,7 @@
   --meal: #5cc394;     --meal-bg: #1f3329;
   --accident: #ef7563; --accident-bg: #3d2420;
   --crate: #c4a8e8;    --crate-bg: #2e2640;
+  --demo: #f2906e;     --demo-bg: #3a241d;
   color-scheme: dark;
 }
 
@@ -228,6 +230,19 @@ form.welcome h1 { text-align: left; }
 .field input:focus, .text-input:focus { outline: 2px solid var(--accent); outline-offset: 1px; }
 .welcome > .field-hint { text-align: left; margin: -6px 2px 0; font-size: 14px; color: var(--muted); }
 .form-error { color: var(--danger); margin: 0; font-weight: 600; }
+.demo-link {
+  align-self: center; display: inline-flex; align-items: center; gap: 4px;
+  min-height: 40px; padding: 0 12px; margin-top: 2px;
+  color: var(--demo); font-size: 15px; font-weight: 600; text-decoration: none;
+}
+.demo-link .icon { font-size: 16px; }
+.demo-banner {
+  display: flex; align-items: center; justify-content: space-between; gap: 10px;
+  margin: 0 0 12px; padding: 8px 12px; border-radius: 12px;
+  background: var(--demo-bg); color: var(--text); font-size: 14px;
+}
+.demo-banner b { color: var(--demo); }
+.demo-banner a { color: var(--demo); font-weight: 600; white-space: nowrap; }
 
 /* ── bottom tabs ── */
 .tabs {

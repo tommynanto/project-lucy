@@ -37,6 +37,10 @@ Put both values in [`js/config.js`](js/config.js). These are safe to commit: the
 - If a phone gets signed out (new phone, cleared browser data), just join again with the name + PIN.
 - The PIN is visible to members under the ⚙︎ on the Today screen.
 
+## Demo mode
+
+**Try the demo** on the welcome screen (or link straight to `https://tommynanto.github.io/project-lucy/?demo`) opens a made-up week for a puppy called Biscuit. It runs entirely in the visitor's browser from `js/demo-db.js`: nothing is sent to Supabase, and every visit starts from the same clean week.
+
 ## Running locally
 
 Any static server works, e.g.:
@@ -54,6 +58,8 @@ Then open http://localhost:8000.
 | `supabase/schema.sql` | Tables, access rules (RLS), `create_household` / `join_household` functions |
 | `js/config.js` | Supabase URL + publishable key |
 | `js/db.js` | Every call to Supabase |
+| `js/demo-db.js` | Demo mode: same interface as `db.js`, with a generated week of data in memory |
+| `js/logo.js` | The golden retriever sketch on the welcome screen |
 | `js/events.js` | Event kinds, labels, date/time helpers |
 | `js/app.js` | Screens (Today, History, Insights, Household, welcome) and quick logging |
 | `js/sheet.js` | Add / edit / delete sheet with the 15-minute time picker |
